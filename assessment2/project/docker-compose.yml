@@ -1,0 +1,17 @@
+services:
+
+  api-service:
+    build:
+      context: ./../api-service
+      dockerfile: ./../api-service/api-service.dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    deploy:
+      mode: replicated
+      replicas: 1
+    volumes:
+      - ./data/api/:/opt/api/
+    environment:
+      HTTP_PORT: 8080
+      STORE_INIT: /opt/api/blog_data.json
